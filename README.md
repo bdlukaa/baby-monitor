@@ -7,22 +7,15 @@
 
 O **Baby Monitor** é um aplicativo Android nativo para monitoramento de bebês, oferecendo controle de sono, alimentação e outras funcionalidades essenciais para ajudar os pais no dia a dia. É um projeto acadêmico, mas com potencial de uso real.
 
-> \[!NOTE] 
+> \[!NOTE]
 > Este projeto está em desenvolvimento como parte de um trabalho de faculdade. O objetivo é criar um app funcional, acessível e útil para pais de recém-nascidos e bebês.
 
 ---
 
 ## 🧪 Tech Stack
 
-- 🧠 **Linguagem:** Kotlin
 - 🎨 **UI:** Jetpack Compose
-- ☁️ **Backend:** Firebase
-  - Firebase Authentication (Google Sign-In)
-  - Cloud Firestore
-  - Firebase Cloud Messaging (Notificações)
-- 🌙 **Modo Noturno:** Suporte nativo via Compose
-- 📊 **Gráficos:** MPAndroidChart (ou alternativa via Compose)
-- 🔄 **Arquitetura:** MVVM + ViewModel + LiveData/StateFlow
+- ☁️ **Backend:** Supabase
 
 ---
 
@@ -43,7 +36,7 @@ O **Baby Monitor** é um aplicativo Android nativo para monitoramento de bebês,
     - [ ] Relatório de troca de fraldas
   - [ ] Vacinas
     - [ ] Registor de vacinas
-    - [ ] Relatório de vacinas 
+    - [ ] Relatório de vacinas
 - [ ] Lembretes
   - [ ] Remédios
   - [ ] Alimentação
@@ -67,24 +60,36 @@ O **Baby Monitor** é um aplicativo Android nativo para monitoramento de bebês,
    ```
 2. Abra o projeto no Android Studio.
 3. Configure o Firebase:
-   * Crie um projeto no Firebase.
-   * Habilite o Firebase Authentication (Google).
-   * Configure Firestore e FCM.
-   * Baixe o `google-services.json` e coloque em `app/`.
-   * Execute o app em um dispositivo ou emulador.
+   - Crie um projeto no Firebase.
+   - Habilite o Firebase Authentication (Google).
+   - Configure Firestore e FCM.
+   - Baixe o `google-services.json` e coloque em `app/`.
+   - Execute o app em um dispositivo ou emulador.
 
 ## 📁 Estrutura planejada
+
 ```
-baby-monitor/
-├── app/
-│   ├── ui/
-│   │   ├── screens/
-│   │   ├── components/
-│   ├── data/
-│   │   ├── repository/
-│   │   └── models/
-│   ├── firebase/
-│   ├── utils/
-│   └── MainActivity.kt
-├── README.md
+app/
+├── data/                   # Data layer
+│   ├── remote/             # Supabase integration
+│   │   ├── SupabaseClient.kt
+│   │   ├── AuthService.kt
+│   │   └── BabyRepository.kt
+│   └── models/             # Data models (Kotlin data classes)
+│       ├── Baby.kt
+│       ├── SleepRecord.kt
+│       └── FeedingRecord.kt
+├── ui/                     # UI layer (Jetpack Compose screens)
+│   ├── theme/
+│   ├── components/
+│   └── screens/
+│       ├── login/
+│       ├── home/
+│       └── baby_detail/
+├── viewmodel/              # ViewModels
+│   ├── AuthViewModel.kt
+│   ├── BabyViewModel.kt
+│   └── SleepViewModel.kt
+├── MainActivity.kt
+└── Application.kt
 ```
